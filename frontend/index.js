@@ -110,7 +110,6 @@ function makeChange(doc, context, options) {
     // effect in the form processed by the backend, but the downside is a performance cost.
     // Should we change this?
     return [applyPatchToDoc(doc, patch, state, true), change]
-
   } else {
     if (!context) context = new Context(doc, actor)
     const queuedRequest = copyObject(change)

@@ -26,12 +26,17 @@ function from(initialState, options) {
 }
 
 function change(doc, options, callback) {
-  const [newDoc, change] = Frontend.change(doc, options, callback)
+  const [newDoc, request, change] = Frontend.change(doc, options, callback)
   return newDoc
 }
 
+function change2(doc, options, callback) {
+  const [newDoc, request, change] = Frontend.change(doc, options, callback)
+  return [newDoc, change]
+}
+
 function emptyChange(doc, options) {
-  const [newDoc, change] = Frontend.emptyChange(doc, options)
+  const [newDoc, request, change] = Frontend.emptyChange(doc, options)
   return newDoc
 }
 
