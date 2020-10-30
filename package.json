@@ -1,16 +1,11 @@
 {
-  "name": "automerge",
-  "version": "0.14.0",
+  "name": "automerge-wasm",
+  "version": "0.1.0",
   "description": "Data structures for building collaborative applications",
-  "main": "dist/automerge.js",
-  "types": "dist/index.d.ts",
+  "main": "src/automerge.js",
+  "types": "@types/automerge/index.d.ts",
   "scripts": {
-    "browsertest": "karma start",
-    "coverage": "nyc --reporter=html --reporter=text mocha",
-    "test": "mocha",
-    "testwasm": "mocha --file test/wasm.js",
-    "build": "webpack && copyfiles --flat @types/automerge/index.d.ts dist",
-    "prepublishOnly": "npm run-script build"
+    "test": "mocha"
   },
   "author": "",
   "repository": {
