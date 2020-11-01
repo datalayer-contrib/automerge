@@ -30,8 +30,6 @@ function addHeapObject(obj) {
     const idx = heap_next;
     heap_next = heap[idx];
 
-    if (typeof(heap_next) !== 'number') throw new Error('corrupt heap');
-
     heap[idx] = obj;
     return idx;
 }
@@ -50,8 +48,6 @@ function getNodeBufferMemory0() {
 
 function passStringToWasm0(arg, malloc) {
 
-    if (typeof(arg) !== 'string') throw new Error('expected a string argument');
-
     const len = Buffer.byteLength(arg);
     const ptr = malloc(len);
     getNodeBufferMemory0().write(arg, ptr, len);
@@ -65,12 +61,6 @@ function getInt32Memory0() {
         cachegetInt32Memory0 = new Int32Array(wasm.memory.buffer);
     }
     return cachegetInt32Memory0;
-}
-
-function _assertBoolean(n) {
-    if (typeof(n) !== 'boolean') {
-        throw new Error('expected a boolean argument');
-    }
 }
 
 function dropObject(idx) {
@@ -150,26 +140,10 @@ function debugString(val) {
     return className;
 }
 
-function _assertNum(n) {
-    if (typeof(n) !== 'number') throw new Error('expected a number argument');
-}
-
 function notDefined(what) { return () => { throw new Error(`${what} is not defined`); }; }
 
 function handleError(e) {
     wasm.__wbindgen_exn_store(addHeapObject(e));
-}
-
-function logError(e) {
-    let error = (function () {
-        try {
-            return e instanceof Error ? `${e.message}\n\nStack:\n${e.stack}` : e.toString();
-        } catch(_) {
-            return "<failed to stringify thrown value>";
-        }
-    }());
-    console.error("wasm-bindgen: imported JS function that was not marked as `catch` threw an error:", error);
-    throw e;
 }
 
 function getArrayU8FromWasm0(ptr, len) {
@@ -178,10 +152,6 @@ function getArrayU8FromWasm0(ptr, len) {
 /**
 */
 class State {
-
-    constructor() {
-        throw new Error('cannot invoke `new` directly');
-    }
 
     static __wrap(ptr) {
         const obj = Object.create(State.prototype);
@@ -201,8 +171,6 @@ class State {
     * @returns {any}
     */
     applyChanges(changes) {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         var ret = wasm.state_applyChanges(this.ptr, addHeapObject(changes));
         return takeObject(ret);
     }
@@ -210,8 +178,6 @@ class State {
     * @param {Array<any>} changes
     */
     loadChanges(changes) {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         wasm.state_loadChanges(this.ptr, addHeapObject(changes));
     }
     /**
@@ -219,8 +185,6 @@ class State {
     * @returns {Array<any>}
     */
     applyLocalChange(change) {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         var ret = wasm.state_applyLocalChange(this.ptr, addHeapObject(change));
         return takeObject(ret);
     }
@@ -228,8 +192,6 @@ class State {
     * @returns {any}
     */
     getPatch() {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         var ret = wasm.state_getPatch(this.ptr);
         return takeObject(ret);
     }
@@ -238,8 +200,6 @@ class State {
     * @returns {Array<any>}
     */
     getChanges(have_deps) {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         var ret = wasm.state_getChanges(this.ptr, addHeapObject(have_deps));
         return takeObject(ret);
     }
@@ -248,8 +208,6 @@ class State {
     * @returns {Array<any>}
     */
     getChangesForActor(actorid) {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         var ret = wasm.state_getChangesForActor(this.ptr, addHeapObject(actorid));
         return takeObject(ret);
     }
@@ -257,8 +215,6 @@ class State {
     * @returns {any}
     */
     getMissingDeps() {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         var ret = wasm.state_getMissingDeps(this.ptr);
         return takeObject(ret);
     }
@@ -266,8 +222,6 @@ class State {
     * @returns {any}
     */
     getUndoStack() {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         var ret = wasm.state_getUndoStack(this.ptr);
         return takeObject(ret);
     }
@@ -275,8 +229,6 @@ class State {
     * @returns {any}
     */
     getRedoStack() {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         var ret = wasm.state_getRedoStack(this.ptr);
         return takeObject(ret);
     }
@@ -284,8 +236,6 @@ class State {
     * @returns {State}
     */
     clone() {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         var ret = wasm.state_clone(this.ptr);
         return State.__wrap(ret);
     }
@@ -293,8 +243,6 @@ class State {
     * @returns {any}
     */
     save() {
-        if (this.ptr == 0) throw new Error('Attempt to use a moved value');
-        _assertNum(this.ptr);
         var ret = wasm.state_save(this.ptr);
         return takeObject(ret);
     }
@@ -330,174 +278,101 @@ module.exports.__wbindgen_json_serialize = function(arg0, arg1) {
     getInt32Memory0()[arg0 / 4 + 0] = ptr0;
 };
 
-module.exports.__wbg_now_291da96737e4c339 = typeof Date.now == 'function' ? Date.now : notDefined('Date.now');
-
-module.exports.__wbindgen_is_undefined = function(arg0) {
-    var ret = getObject(arg0) === undefined;
-    _assertBoolean(ret);
-    return ret;
-};
-
-module.exports.__wbg_self_1b7a39e3a92c949c = function() {
-    try {
-        try {
-            var ret = self.self;
-            return addHeapObject(ret);
-        } catch (e) {
-            handleError(e)
-        }
-    } catch (e) {
-        logError(e)
-    }
-};
-
-module.exports.__wbg_crypto_968f1772287e2df0 = function(arg0) {
-    try {
-        var ret = getObject(arg0).crypto;
-        return addHeapObject(ret);
-    } catch (e) {
-        logError(e)
-    }
-};
-
-module.exports.__wbg_getRandomValues_a3d34b4fee3c2869 = function(arg0) {
-    try {
-        var ret = getObject(arg0).getRandomValues;
-        return addHeapObject(ret);
-    } catch (e) {
-        logError(e)
-    }
-};
-
-module.exports.__wbg_getRandomValues_f5e14ab7ac8e995d = function(arg0, arg1, arg2) {
-    try {
-        getObject(arg0).getRandomValues(getArrayU8FromWasm0(arg1, arg2));
-    } catch (e) {
-        logError(e)
-    }
-};
-
-module.exports.__wbg_require_604837428532a733 = function(arg0, arg1) {
-    try {
-        var ret = require(getStringFromWasm0(arg0, arg1));
-        return addHeapObject(ret);
-    } catch (e) {
-        logError(e)
-    }
-};
-
-module.exports.__wbg_randomFillSync_d5bd2d655fdf256a = function(arg0, arg1, arg2) {
-    try {
-        getObject(arg0).randomFillSync(getArrayU8FromWasm0(arg1, arg2));
-    } catch (e) {
-        logError(e)
-    }
-};
-
 module.exports.__wbindgen_object_drop_ref = function(arg0) {
     takeObject(arg0);
 };
 
-module.exports.__wbg_new_ec28d6ba821801cb = function() {
+module.exports.__wbg_now_291da96737e4c339 = typeof Date.now == 'function' ? Date.now : notDefined('Date.now');
+
+module.exports.__wbg_self_1b7a39e3a92c949c = function() {
     try {
-        var ret = new Array();
+        var ret = self.self;
         return addHeapObject(ret);
     } catch (e) {
-        logError(e)
+        handleError(e)
     }
+};
+
+module.exports.__wbg_require_604837428532a733 = function(arg0, arg1) {
+    var ret = require(getStringFromWasm0(arg0, arg1));
+    return addHeapObject(ret);
+};
+
+module.exports.__wbg_crypto_968f1772287e2df0 = function(arg0) {
+    var ret = getObject(arg0).crypto;
+    return addHeapObject(ret);
+};
+
+module.exports.__wbindgen_is_undefined = function(arg0) {
+    var ret = getObject(arg0) === undefined;
+    return ret;
+};
+
+module.exports.__wbg_getRandomValues_a3d34b4fee3c2869 = function(arg0) {
+    var ret = getObject(arg0).getRandomValues;
+    return addHeapObject(ret);
+};
+
+module.exports.__wbg_getRandomValues_f5e14ab7ac8e995d = function(arg0, arg1, arg2) {
+    getObject(arg0).getRandomValues(getArrayU8FromWasm0(arg1, arg2));
+};
+
+module.exports.__wbg_randomFillSync_d5bd2d655fdf256a = function(arg0, arg1, arg2) {
+    getObject(arg0).randomFillSync(getArrayU8FromWasm0(arg1, arg2));
 };
 
 module.exports.__wbg_get_82c22aeeb618210d = function(arg0, arg1) {
-    try {
-        var ret = getObject(arg0)[arg1 >>> 0];
-        return addHeapObject(ret);
-    } catch (e) {
-        logError(e)
-    }
+    var ret = getObject(arg0)[arg1 >>> 0];
+    return addHeapObject(ret);
 };
 
 module.exports.__wbg_length_1f2b77c3caba45bb = function(arg0) {
-    try {
-        var ret = getObject(arg0).length;
-        _assertNum(ret);
-        return ret;
-    } catch (e) {
-        logError(e)
-    }
+    var ret = getObject(arg0).length;
+    return ret;
+};
+
+module.exports.__wbg_new_ec28d6ba821801cb = function() {
+    var ret = new Array();
+    return addHeapObject(ret);
 };
 
 module.exports.__wbg_push_ffaa2df7422d3b4c = function(arg0, arg1) {
-    try {
-        var ret = getObject(arg0).push(getObject(arg1));
-        _assertNum(ret);
-        return ret;
-    } catch (e) {
-        logError(e)
-    }
+    var ret = getObject(arg0).push(getObject(arg1));
+    return ret;
 };
 
 module.exports.__wbg_new_a674acf697de3e9f = function(arg0, arg1) {
-    try {
-        var ret = new Error(getStringFromWasm0(arg0, arg1));
-        return addHeapObject(ret);
-    } catch (e) {
-        logError(e)
-    }
-};
-
-module.exports.__wbg_instanceof_Uint8Array_4342cb3c1a0c83fe = function(arg0) {
-    try {
-        var ret = getObject(arg0) instanceof Uint8Array;
-        _assertBoolean(ret);
-        return ret;
-    } catch (e) {
-        logError(e)
-    }
-};
-
-module.exports.__wbg_new_da17c07b1fbb4a8b = function(arg0) {
-    try {
-        var ret = new Uint8Array(getObject(arg0));
-        return addHeapObject(ret);
-    } catch (e) {
-        logError(e)
-    }
-};
-
-module.exports.__wbg_newwithbyteoffsetandlength_284676320876299d = function(arg0, arg1, arg2) {
-    try {
-        var ret = new Uint8Array(getObject(arg0), arg1 >>> 0, arg2 >>> 0);
-        return addHeapObject(ret);
-    } catch (e) {
-        logError(e)
-    }
-};
-
-module.exports.__wbg_length_b7dc6aed3ca09be1 = function(arg0) {
-    try {
-        var ret = getObject(arg0).length;
-        _assertNum(ret);
-        return ret;
-    } catch (e) {
-        logError(e)
-    }
-};
-
-module.exports.__wbg_set_4a8545284001c06f = function(arg0, arg1, arg2) {
-    try {
-        getObject(arg0).set(getObject(arg1), arg2 >>> 0);
-    } catch (e) {
-        logError(e)
-    }
+    var ret = new Error(getStringFromWasm0(arg0, arg1));
+    return addHeapObject(ret);
 };
 
 module.exports.__wbg_buffer_f897a8d316863411 = function(arg0) {
-    try {
-        var ret = getObject(arg0).buffer;
-        return addHeapObject(ret);
-    } catch (e) {
-        logError(e)
-    }
+    var ret = getObject(arg0).buffer;
+    return addHeapObject(ret);
+};
+
+module.exports.__wbg_newwithbyteoffsetandlength_284676320876299d = function(arg0, arg1, arg2) {
+    var ret = new Uint8Array(getObject(arg0), arg1 >>> 0, arg2 >>> 0);
+    return addHeapObject(ret);
+};
+
+module.exports.__wbg_length_b7dc6aed3ca09be1 = function(arg0) {
+    var ret = getObject(arg0).length;
+    return ret;
+};
+
+module.exports.__wbg_new_da17c07b1fbb4a8b = function(arg0) {
+    var ret = new Uint8Array(getObject(arg0));
+    return addHeapObject(ret);
+};
+
+module.exports.__wbg_set_4a8545284001c06f = function(arg0, arg1, arg2) {
+    getObject(arg0).set(getObject(arg1), arg2 >>> 0);
+};
+
+module.exports.__wbg_instanceof_Uint8Array_4342cb3c1a0c83fe = function(arg0) {
+    var ret = getObject(arg0) instanceof Uint8Array;
+    return ret;
 };
 
 module.exports.__wbindgen_debug_string = function(arg0, arg1) {
