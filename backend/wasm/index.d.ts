@@ -12,6 +12,10 @@ export class State {
 */
   loadChanges(changes: Array<any>): void;
 /**
+* @param {any} ack_version 
+*/
+  ack(ack_version: any): void;
+/**
 * @param {any} change 
 * @returns {Array<any>} 
 */

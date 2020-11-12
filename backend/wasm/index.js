@@ -75,6 +75,18 @@ function takeObject(idx) {
     return ret;
 }
 
+function isLikeNone(x) {
+    return x === undefined || x === null;
+}
+
+let cachegetFloat64Memory0 = null;
+function getFloat64Memory0() {
+    if (cachegetFloat64Memory0 === null || cachegetFloat64Memory0.buffer !== wasm.memory.buffer) {
+        cachegetFloat64Memory0 = new Float64Array(wasm.memory.buffer);
+    }
+    return cachegetFloat64Memory0;
+}
+
 function debugString(val) {
     // primitive types
     const type = typeof val;
@@ -179,6 +191,12 @@ class State {
     */
     loadChanges(changes) {
         wasm.state_loadChanges(this.ptr, addHeapObject(changes));
+    }
+    /**
+    * @param {any} ack_version
+    */
+    ack(ack_version) {
+        wasm.state_ack(this.ptr, addHeapObject(ack_version));
     }
     /**
     * @param {any} change
@@ -373,6 +391,13 @@ module.exports.__wbg_set_4a8545284001c06f = function(arg0, arg1, arg2) {
 module.exports.__wbg_instanceof_Uint8Array_4342cb3c1a0c83fe = function(arg0) {
     var ret = getObject(arg0) instanceof Uint8Array;
     return ret;
+};
+
+module.exports.__wbindgen_number_get = function(arg0, arg1) {
+    const obj = getObject(arg1);
+    var ret = typeof(obj) === 'number' ? obj : undefined;
+    getFloat64Memory0()[arg0 / 8 + 1] = isLikeNone(ret) ? 0 : ret;
+    getInt32Memory0()[arg0 / 4 + 0] = !isLikeNone(ret);
 };
 
 module.exports.__wbindgen_debug_string = function(arg0, arg1) {
