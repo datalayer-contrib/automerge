@@ -200,7 +200,7 @@ declare module 'automerge' {
   }
 
   interface BackendState {
-    // no public methods or properties
+    getIn(p: any): any
   }
 
   interface Change {
