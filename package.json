@@ -1,5 +1,5 @@
 {
-  "name": "automerge",
+  "name": "automerge-performance",
   "version": "0.14.0",
   "description": "Data structures for building collaborative applications",
   "main": "dist/automerge.js",
