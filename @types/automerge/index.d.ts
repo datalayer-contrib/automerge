@@ -50,6 +50,8 @@ declare module 'automerge' {
   function load<T>(data: Uint8Array, options?: any): Doc<T>
   function save<T>(doc: Doc<T>): Uint8Array
 
+  function setDefaultBackend(wasmBackend: any): void
+
   // custom CRDT types
 
   class TableRow {
@@ -151,7 +153,7 @@ declare module 'automerge' {
   }
 
   interface BackendState {
-    // no public methods or properties
+    getIn(p: any): any
   }
 
   // A change request, sent from the frontend to the backend
