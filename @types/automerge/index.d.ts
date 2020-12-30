@@ -53,6 +53,8 @@ declare module 'automerge' {
   function redo<T>(doc: Doc<T>, message?: string): Doc<T>
   function undo<T>(doc: Doc<T>, message?: string): Doc<T>
 
+  function setDefaultBackend(wasmBackend: any): void
+
   // custom CRDT types
 
   class TableRow {
