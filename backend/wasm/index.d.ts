@@ -12,10 +12,6 @@ export class State {
 */
   loadChanges(changes: Array<any>): void;
 /**
-* @param {any} ack_version 
-*/
-  ack(ack_version: any): void;
-/**
 * @param {any} change 
 * @returns {Array<any>} 
 */
@@ -38,14 +34,6 @@ export class State {
 * @returns {any} 
 */
   getMissingDeps(): any;
-/**
-* @returns {any} 
-*/
-  getUndoStack(): any;
-/**
-* @returns {any} 
-*/
-  getRedoStack(): any;
 /**
 * @returns {State} 
 */

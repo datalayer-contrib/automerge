@@ -86,7 +86,6 @@ function getAllChanges(doc) {
 function applyChanges(doc, changes) {
   const oldState = Frontend.getBackendState(doc)
   const [newState, patch] = backend.applyChanges(oldState, changes)
-  backend.ack(newState, patch.version);
   patch.state = newState
   return Frontend.applyPatch(doc, patch)
 }
