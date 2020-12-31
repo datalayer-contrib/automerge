@@ -5,7 +5,8 @@
   "main": "src/automerge.js",
   "types": "@types/automerge/index.d.ts",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "build": ""
   },
   "author": "",
   "repository": {
