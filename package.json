@@ -1,5 +1,5 @@
 {
-  "name": "automerge-wasm",
+  "name": "automerge-wasm-node",
   "version": "0.1.0",
   "description": "Data structures for building collaborative applications",
   "main": "src/automerge.js",

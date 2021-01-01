@@ -1,4 +1,4 @@
-declare module 'automerge-wasm' {
+declare module 'automerge-wasm-node' {
   /**
    * The return type of `Automerge.init<T>()`, `Automerge.change<T>()`, etc. where `T` is the
    * original type. It is a recursively frozen version of the original type.
